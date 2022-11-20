@@ -14,42 +14,42 @@ Our project uses the Hotel Booking Dataset to create a machine learning algorith
 
 Column Descriptions
 
-* `hotel `- booking information of either 'city hotel' or 'resort hotel'
-* `is_canceled `- value indiciating if the booking was canceled (1) or not (0)
-* `lead_time `- number of days between the date of booking and the date of arrival
-* `arrival_date_year `- year of the arrival date
-* `arrival_date_month `- month of the arrival date in 12 `str` categories
-* `arrival_date_week_number `- week number of the arrival date
-* `arrival_date_day_of_month `- day of month of the arrival date
-* `stays_in_weekend_nights `- number of nights guests stayed or booked on the weekends (Saturday or Sunday)
-* `stays_in_week_nights `- number of nights guests stayed or booked on the weekdays (Monday to Friday)
-* `adults `- number of adults
-* `children `- number of children
-* `babies `- number of babies
-* `meal `- categorical value indicating the meal plan ( `'BB'` - Bed & Breakfast)
-* `country `- country of origin
-* `market_segment `- market segment designation ( `'TA'` - Travel Agents, `'TO'` - Tour Operators)
-* `distribution_channel `- booking distribution channel ( `'TA'` - Travel Agents, `'TO'` - Tour Operators)
-* `is_repeated_guest `- value indicating if the booking was from repeated guest (1) or not (0)
-* `previous_cancellations `- number of previous booking canceled by customer
-* `previous_bookings_not_canceled `- number of previous booking not canceled by customer
-* `reserved_room_type `- code of type of room reserved (anonymity reasons)
-* `assigned_room_type `- code of type of room assigned (anonymity reasons)
-* `booking_changes `- number of changes done to the booking by customer
-* `deposit_type `- type of deposit made by the customer ( `'No Deposit'` - no deposit made, `'Non Refund'` - payment made in full, `'Refundable'` - deposit made)
-* `agent `- ID of the travel agency (anonymity reasons)
-* `company `- ID of the booking company (anonymity reasons)
-* `days_in_waiting_list `- number of days the booking was in the waiting list
-* `customer_type `- type of customer ( `'Transient'` - booking made not part of group, `'Transient-Party'` - booking is transient, but associated to at least one other)
-* `adr `- Average Daily Rate (Sum of all lodging transaction divided by the length of stay)
-* `required_car_parking_spaces `- number of parking spaces required by customer
-* `total_special_requests `- number of special requests made by customer
-* `reservation_status `- status of reservation ( `'Check-out'` - customer has stayed and checked out, `'No-Show'` - customer did not check in, `'Canceled'` - customer cancelled)
-* `reservation_status_date `- date of when reservation status was set
-* `name `- name of guests (not real)
-* `email `- email of guests (not real)
+* `hotel` - booking information of either 'city hotel' or 'resort hotel'
+* `is_canceled` - value indiciating if the booking was canceled (1) or not (0)
+* `lead_time` - number of days between the date of booking and the date of arrival
+* `arrival_date_year` - year of the arrival date
+* `arrival_date_month` - month of the arrival date in 12 `str` categories
+* `arrival_date_week_number` - week number of the arrival date
+* `arrival_date_day_of_month` - day of month of the arrival date
+* `stays_in_weekend_nights` - number of nights guests stayed or booked on the weekends (Saturday or Sunday)
+* `stays_in_week_nights` - number of nights guests stayed or booked on the weekdays (Monday to Friday)
+* `adults` - number of adults
+* `children` - number of children
+* `babies` - number of babies
+* `meal` - categorical value indicating the meal plan ( `'BB'` - Bed & Breakfast)
+* `country` - country of origin
+* `market_segment` - market segment designation ( `'TA'` - Travel Agents, `'TO'` - Tour Operators)
+* `distribution_channel` - booking distribution channel ( `'TA'` - Travel Agents, `'TO'` - Tour Operators)
+* `is_repeated_guest` - value indicating if the booking was from repeated guest (1) or not (0)
+* `previous_cancellations` - number of previous booking canceled by customer
+* `previous_bookings_not_canceled` - number of previous booking not canceled by customer
+* `reserved_room_type` - code of type of room reserved (anonymity reasons)
+* `assigned_room_type` - code of type of room assigned (anonymity reasons)
+* `booking_changes` - number of changes done to the booking by customer
+* `deposit_type` - type of deposit made by the customer ( `'No Deposit'` - no deposit made, `'Non Refund'` - payment made in full, `'Refundable'` - deposit made)
+* `agent` - ID of the travel agency (anonymity reasons)
+* `company` - ID of the booking company (anonymity reasons)
+* `days_in_waiting_list` - number of days the booking was in the waiting list
+* `customer_type` - type of customer ( `'Transient'` - booking made not part of group, `'Transient-Party'` - booking is transient, but associated to at least one other)
+* `adr` - Average Daily Rate (Sum of all lodging transaction divided by the length of stay)
+* `required_car_parking_spaces` - number of parking spaces required by customer
+* `total_special_requests` - number of special requests made by customer
+* `reservation_status` - status of reservation ( `'Check-out'` - customer has stayed and checked out, `'No-Show'` - customer did not check in, `'Canceled'` - customer cancelled)
+* `reservation_status_date` - date of when reservation status was set
+* `name` - name of guests (not real)
+* `email` - email of guests (not real)
 * `phone-number` - phone number of guests (not real)
-* `credit_card `- credit card number of guests (not real)
+* `credit_card` - credit card number of guests (not real)
 
 
 
@@ -60,11 +60,11 @@ In our Data Exploration process, we dropping the following columns due to their 
 * `name` - Artifically created by owner of dataset
 * `email` - Artifically created by owner of dataset
 * `phone-number` - Artifically created by owner of dataset
-* `credit_card `- Artifically created by owner of dataset
-* `country `- Dataset is insufficient to make assumptions on country-wide scale
-* `agent `- Not possible to deciphyer the ID of the travel agency
-* `reserved_room_type `- Not possible to deciphyer the ID of the room (replaced by 'success_room_type')
-* `assigned_room_type `- Not possible to deciphyer the ID of the room (replaced by 'success_room_type')
+* `credit_card` - Artifically created by owner of dataset
+* `country` - Dataset is insufficient to make assumptions on country-wide scale
+* `agent` - Not possible to deciphyer the ID of the travel agency
+* `reserved_room_type` - Not possible to deciphyer the ID of the room (replaced by 'success_room_type')
+* `assigned_room_type` - Not possible to deciphyer the ID of the room (replaced by 'success_room_type')
 
 As stated above, we created a new column `'success_room_type'` which returns a `True `value when the customer was assigned to the room which they reserved `('reserved_room_type' == 'assigned_room_type')` or `False `when the two values does not match.
 
