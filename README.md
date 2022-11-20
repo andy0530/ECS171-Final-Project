@@ -76,7 +76,7 @@ Additionally, we analyzed the distribution of all variables using a pairplot for
 
 As it is not normally distributed, we will preprocess the data by normalizing.
 
-Lastly, we observed NaN values in 'children' column. However, we have replaced all NaN values with 0 as the majority of values in the 'children' column is 0.
+Lastly, we observed `NaN` values in `'children'` column. However, we have replaced all `NaN` values with `0` as the majority of values in the `'children'` column is `0`.
 
 
 ## Pre-processing
