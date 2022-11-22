@@ -81,4 +81,13 @@ Lastly, we observed `NaN` values in `'children'` column. However, we have replac
 
 ## Pre-processing
 
-As mentioned above, we will be normalizing the data through MinMax normalization.
+For our categorical variables, we will encode the set of following categories to be `0~(n_classes-1)`. Additionally, we have listed their numerical values for each unique values:
+
+* `hotel` - `'Resort Hotel': 0`, `'City Hotel': 1`
+* `arrival_date_month` - `'January': 0`, `'February': 1`, ... , `'December': 11`
+* `success_room_type` - `'True': 0`, `'False': 1`
+* `arrival_date_year` - `2015: 0`, `2016: 1`, `2017: 2`
+
+However, for the other categorical variables—`'meal'`, `'market_segment'`, `'distribution_channel'`, `'deposit_type'`, `'customer_type'`, `'reservation_status'`— we decided to do one-hot encoding as the unique values of their corresponding columns were not instinctively numerically orderable.
+
+As mentioned above, we scaled our data through MinMax normalization.
