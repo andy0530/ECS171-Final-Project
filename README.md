@@ -4,7 +4,7 @@ Group 26
 * Jun Ha (Andy) Lee
 * Erick S. Arenas
 * Soumyajit (Sam) Chatterjee
-* Joyjit Chatterjee)
+* Joyjit (Joy) Chatterjee
 
 
 ## Abstract
@@ -70,7 +70,7 @@ In our Data Exploration process, we dropping the following columns due to their 
 * `reserved_room_type` - Not possible to deciphyer the ID of the room (replaced by 'success_room_type')
 * `assigned_room_type` - Not possible to deciphyer the ID of the room (replaced by 'success_room_type')
 
-As stated above, we created a new column `'success_room_type'` which returns a `True `value when the customer was assigned to the room which they reserved `('reserved_room_type' == 'assigned_room_type')` or `False `when the two values does not match.
+As stated above, we created a new column `'success_room_type'` which returns a `True` value when the customer was assigned to the room which they reserved `('reserved_room_type' == 'assigned_room_type')` or `False` when the two values does not match.
 
 Additionally, we analyzed the distribution of all variables using a pairplot for all numerical columns and a pie char for all categorical columns. From the numerical columns, we were able to find that a lot of the columns were right-skewed as more observations had a value of 0. Additionally, our QQ-plot also agrees that the columns have a right-skewed distributions as the plots have a long tail to the right. 
 
@@ -81,4 +81,13 @@ Lastly, we observed `NaN` values in `'children'` column. However, we have replac
 
 ## Pre-processing
 
-As mentioned above, we will be normalizing the data through MinMax normalization.
+For our categorical variables, we will encode the set of following categories to be `0~(n_classes-1)`. Additionally, we have listed their numerical values for each unique values:
+
+* `hotel` - `'Resort Hotel': 0`, `'City Hotel': 1`
+* `arrival_date_month` - `'January': 0`, `'February': 1`, ... , `'December': 11`
+* `success_room_type` - `'True': 0`, `'False': 1`
+* `arrival_date_year` - `2015: 0`, `2016: 1`, `2017: 2`
+
+However, for the other categorical variables—`'meal'`, `'market_segment'`, `'distribution_channel'`, `'deposit_type'`, `'customer_type'`, `'reservation_status'`— we decided to do one-hot encoding as the unique values of their corresponding columns were not instinctively numerically orderable.
+
+As mentioned above, we scaled our data through MinMax normalization.
