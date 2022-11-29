@@ -123,18 +123,13 @@ meaning that our theory was right by eliminating those features.
 
 Finally we conclude that the three most relevant feature are 
 
-*`previous_cancellations`
-*`previous_bookings_not_canceled`
-*`required_car_parking_spaces`
+* `previous_cancellations`
+* `previous_bookings_not_canceled`
+* `required_car_parking_spaces`
 
 
 with required car parking spaces having the largest coeffiecient. previous cancellations is the second largest and
 not previous cancellations the third highest. 
 
-interpretation:
-required car parking spaces have a higher coeffiecient with show a great correlation with not canceling the booking. 
-This is because people that reserver more parking spaces for they hotel stay are more likely to not cancel they reservation while people that do not have parking spaces are more likely to cancel.
-Second highest is previous_cancellations which indicate that if the person have cancel before they are most likely to cancel again therefore it increases the likelihood of a reservation being cancel.
-The thirds highest show that if a person has not cancel before they are most likely to not cancel again in their next booking. 
-This meaning that a person who has parking spot reserved and has not cancel before is probably not going to cancel their staying. 
-On the other hand if a person has cancel before and they do not have parking spaces they are likely to cancel they booking.
+Interpretation:
+Going back to our model with our best accuracy. We find that for the three most essential features, required car parking spaces have a higher coefficient which shows a great correlation to not cancel the booking. This is because people who reserve more parking spaces are more likely to not cancel the reservation whereas people that do not have parking spaces have the opposite effect. The second highest is previous_cancellations which indicates that if a person has a previous cancellation, they are most likely to cancel again. Therefore it increases the likelihood of a reservation being canceled. Finally, the third highest feature, previous_boo kings_not _canceled shows that if a person has not canceled previously, then they are most likely to not cancel again in their next booking. This means that a person who has a parking spot reserved and has not canceled before is probably not going to cancel their reservation. On the other hand, if a person has canceled before and they do not have reserved parking spaces, they are likely to cancel the booking.
