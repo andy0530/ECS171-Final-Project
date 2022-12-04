@@ -15,8 +15,11 @@ This cancellation rate was surprising to our group. The prospect of creating a m
 
 Our group was also interested in what factors had a higher impact on a reservation being cancelled. These factors, if well documented, could help the hotel business better shift their services to include more customers that were less likely to cancel.
 
+## Methods
 
-## Pre-processing
+### Data Exploration
+
+### Pre-processing
 
 For our categorical variables, we will encode the set of following categories to be `0~(n_classes-1)`. Additionally, we have listed their numerical values for each unique values:
 
@@ -30,7 +33,7 @@ However, for the other categorical variables—`'meal'`, `'market_segment'`, `'d
 As mentioned above, we scaled our data through MinMax normalization.
 
 
-## Logistic Model
+### Model 1: Logistic Model
 
 
  For our logistic regression model we first run a general model with all of our feature excepting `'reservation_status_Canceled', 'reservation_status_Check-Out','reservation_status_No-Show'`. Our y-intercept is `is canceled` and our X is the rest of the features.
@@ -70,3 +73,29 @@ not previous cancellations the third highest.
 
 Interpretation:
 Going back to our model with our best accuracy. We find that for the three most essential features, required car parking spaces have a higher coefficient which shows a great correlation to not cancel the booking. This is because people who reserve more parking spaces are more likely to not cancel the reservation whereas people that do not have parking spaces have the opposite effect. The second highest is previous_cancellations which indicates that if a person has a previous cancellation, they are most likely to cancel again. Therefore it increases the likelihood of a reservation being canceled. Finally, the third highest feature, previous_boo kings_not _canceled shows that if a person has not canceled previously, then they are most likely to not cancel again in their next booking. This means that a person who has a parking spot reserved and has not canceled before is probably not going to cancel their reservation. On the other hand, if a person has canceled before and they do not have reserved parking spaces, they are likely to cancel the booking.
+
+### Model 2: Neural Net Model
+
+## Results
+
+### Model 1: Logistic Model
+
+### Model 2: Neural Net Model
+
+## Discussion
+
+### Data Exploration
+
+### Preprocessing
+
+### Model 1: Logistic Model
+
+### Model 2: Neural Net Model
+
+## Conclusion
+
+## Collaboration
+* Jun Ha (Andy) Lee
+* Erick S. Arenas
+* Soumyajit (Sam) Chatterjee
+* Joyjit (Joy) Chatterjee
