@@ -18,32 +18,32 @@ Our group was also interested in what factors had a higher impact on a reservati
 ## Methods
 
 ### Data Exploration
-In our Data Exploration process, we dropping the following columns due to their consequent reasons further explained in the discussion section:
+In our Data Exploration process, we dropped the following columns due to their consequent reasons further explained in the discussion section:
 
-* `name` - Artifically created by owner of dataset
-* `email` - Artifically created by owner of dataset
-* `phone-number` - Artifically created by owner of dataset
-* `credit_card` - Artifically created by owner of dataset
-* `country` - Dataset is insufficient to make assumptions on country-wide scale
-* `agent` - Not possible to deciphyer the ID of the travel agency
-* `reserved_room_type` - Not possible to deciphyer the ID of the room (replaced by 'success_room_type')
-* `assigned_room_type` - Not possible to deciphyer the ID of the room (replaced by 'success_room_type')
+* `name` - Artificially created by owner of dataset
+* `email` - Artificially created by owner of dataset
+* `phone-number` - Artificially created by owner of dataset
+* `credit_card` - Artificially created by owner of dataset
+* `country` - Dataset is insufficient to make assumptions on a country-wide scale
+* `agent` - Not possible to decipher the ID of the travel agency
+* `reserved_room_type` - Not possible to decipher the ID of the room (replaced by 'success_room_type')
+* `assigned_room_type` - Not possible to decipher the ID of the room (replaced by 'success_room_type')
 
-As stated above, we created a new column `'success_room_type'` which returns a `True` value when the customer was assigned to the room which they reserved `('reserved_room_type' == 'assigned_room_type')` or `False` when the two values does not match. The code to create this columns is shown below:
+As stated above, we created a new column `'success_room_type'` which returns a `True` value when the customer was assigned to the room which they reserved `('reserved_room_type' == 'assigned_room_type')` or `False` when the two values do not match. The code to create this column is shown below:
 
 ```
 data['success_room_type'] = data.apply(lambda row: row.reserved_room_type == row.assigned_room_type, axis=1)
 ```
 
-Additionally, we analyzed the distribution of all variables using a pairplot for all numerical columns and a pie char for all categorical columns. From the numerical columns, we were able to find that a lot of the columns were right-skewed as more observations had a value of 0. Additionally, our QQ-plot also agrees that the columns have a right-skewed distributions as the plots have a long tail to the right. 
+Additionally, we analyzed the distribution of all variables using a pairplot for all numerical columns and a pie chart for all categorical columns. From the numerical columns, we were able to find that a lot of the columns were right-skewed as more observations had a value of 0. Additionally, our Q-Q plot also agrees that the columns have right-skewed distributions as the plots have a long tail to the right. 
 
-As it is not normally distributed, we will preprocess the data by normalizing.
+As it is not normally distributed, we will preprocess the data by normalizing it.
 
-Lastly, we observed `NaN` values in `'children'` column. However, we have replaced all `NaN` values with `0` as the majority of values in the `'children'` column is `0`.
+Lastly, we observed `NaN` values in `'children'` column. However, we have replaced all `NaN` values with `0` as the most of values in the `'children'` column are `0`.
 
 ### Pre-processing
 
-For our categorical variables, we will encode the set of following categories to be `0~(n_classes-1)`. Additionally, we have listed their numerical values for each unique values:
+For our categorical variables, we will encode the set of following categories to be `0~(n_classes-1)`. Additionally, we have listed their numerical values for each unique value:
 
 * `hotel` - `'Resort Hotel': 0`, `'City Hotel': 1`
 * `arrival_date_month` - `'January': 0`, `'February': 1`, ... , `'December': 11`
@@ -58,7 +58,6 @@ For the following categorical variables, we will do one-hot encoding.
 * `customer_type`
 * `reservation_status`
 
-As mentioned above, we scaled our data through MinMax normalization.
 As mentioned above, we scaled our data through MinMax normalization.
 
 ### Model 1: Logistic Model
@@ -279,45 +278,45 @@ Attempt 5 (Increased Epochs and Batch Size):
 
 ### Data Exploration
 
-While exploring our data, we initially dropped four columns, `'name'`, `'email'`, `'phone-number'`, `'credit_card'`, that was artificially created by the owner of the dataset as this information had no relevancy to our dataset and could be ignored to predict the cacelation status of each observation.
+While exploring our data, we initially dropped four columns, `'name'`, `'email'`, `'phone-number'`, `'credit_card'`, that was artificially created by the owner of the dataset as this information had no relevance to our dataset and could be ignored to predict the cancellation status of each observation.
 Additionally, we found three additional columns, `'agent'`, `'reserved_room_type'`, `'assigned_room_type'`, with values that were not decipherable as they were replaced by ID, not explained by the dataset due to anonymity reasons.
 Therefore, we removed those three columns, but, we were able to utilize some information to create a new column, `'success_room_type'`, which returns a boolean value based on `'assigned_room_type'` and `'reserved_room_type'`.
-By doing so, we are able to extract most information from what is given. However, it is important to note that we might classify `'success_room_type'` as `False` when a customer was assigned a room better than the one reserved.
-This shows how a situation could be misinterpreted when a customer was simply offered a free 'upgrade'. Yet, we believe that this data might offer significant information that could be crucial in predicting if the customer cancelled or not.
+By doing so, we are able to extract the most information from what is given. However, it is important to note that we might classify `'success_room_type'` as `False` when a customer was assigned a room better than the one reserved.
+This shows how a situation could be misinterpreted when a customer was simply offered a free 'upgrade'. Yet, we believe that this data might offer significant information that could be crucial in predicting if the customer canceled or not.
 Lastly, we removed `'country'` as the dataset does not contain equal information on all countries in the world. Therefore, we concluded that the dataset is insufficient to make assumptions on a country-wide scale.
 
 ![pairplot](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/1.png?raw=true)
 
-Secondly, from our pariplot, we can observe that most of the numerical variables does not contain negative values. This shows that a 'relu' activation function might be useful in creating our nerual net in latter part of this project.
-Additionally, we can observe some numerical variables showing a categorical variable-like distribution. For example, `'arrival_date_year'` represents the year of arrival date from a dataset with hotel bookings between the 1st of July 2015 and 31st of August 2017.
-Since it only contains three values of [2015, 2016, 2017], we believe it would be better to consider `'arrival_date_year'` as a categorical variables.
-Lastly, we can observe presence outliers from the pairplot such as the value with `'children' = 10`. Therefore, we will observe the effects of these points later in the study.
+Secondly, from our pariplot, we can the observe that all of the numerical variables do not contain negative values. This shows that a 'relu' activation function might be useful in creating our neural net in the latter part of this project.
+Additionally, we can observe some numerical variables showing a categorical variable-like distribution. For example, `'arrival_date_year'` represents the year of arrival date from a dataset with hotel bookings between the 1st of July 2015 and the 31st of August 2017.
+Since it only contains three values of [2015, 2016, 2017], we believe it would be better to consider `'arrival_date_year'` as a categorical variable.
+Lastly, we can observe the presence of outliers from the pairplot such as the value with `'children' = 10`. Therefore, we will observe the effects of these points later in the study.
 
 
 ![qq1](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-1.png?raw=true)
 ![qq2](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-2.png?raw=true)
 
-(Samples from series of Q-Q plots)
+(Samples from a series of Q-Q plots)
 
-From our Q-Q plots, we can observe a right-skewed distributions as the plots have a long tail to the right. Additionally, we observe no negative values.
-Since, we cannot standardize our data when it is not normally distributed, we selected to do MinMax normalization.
+From our Q-Q plots, we can observe right-skewed distributions as the plots have a long tail to the right. Additionally, we observe no negative values.
+Since we cannot standardize our data when it is not normally distributed, we selected to do MinMax normalization.
 
 ![pie1](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-3.png?raw=true)
 ![pie2](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-4.png?raw=true)
 ![pie3](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-5.png?raw=true)
 
-(Samples from series of pie charts)
+(Samples from a series of pie charts)
 
 From our pie charts, we do see some values as 'Undefined' is categories such as `meal`, `distribution_channel`, and `market_segment`.
 However, we will wait until our model fitting to consider these values as the categories mentioned above may not be relevant.
-With finding null values, we observe that the four columns that have NaN values in the `'children'` column also has a value 'Undefined' for the `'distribution_channel'` variable.
+With finding null values, we observe that the four columns that have NaN values in the `'children'` column also have a value 'Undefined' for the `'distribution_channel'` variable.
 Therefore, we decided to drop these four rows in our study as the rows had incomplete information to offer significant data to our models.
 
 ### Preprocessing
 
 In our data preprocessing, we decided to encode the set of categories to be 0~(n_classes-1) for `'hotel'`, `'arrival_date_month'`, `'success_room_type'`, and `'arrival_date_year'`.
-For `'hotel'` and `'success_room_type'`, we decided to encode this way as there was only two unique values in the columns. Therefore, there was no need for additional encoding.
-For the other two columns, we decided to encode this way as each columns represents a consecutive numerical value.
+For `'hotel'` and `'success_room_type'`, we decided to encode this way as there was only two unique values in the columns. Therefore, there were no need for additional encoding.
+For the other two columns, we decided to encode this way as each column represents a consecutive numerical value.
 For example, `'arrival_date_month'` has 12 unique values corresponding to each month of the year. Therefore, we encoded this variable from 0~11 in the order of the months.
 However, for the other categorical variables—`'meal'`, `'market_segment'`, `'distribution_channel'`, `'deposit_type'`, `'customer_type'`, `'reservation_status'`— we decided to do one-hot encoding as the unique values of their corresponding columns were not instinctively numerically orderable.
 
