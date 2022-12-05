@@ -41,10 +41,10 @@ Lastly, we observed `NaN` values in `'children'` column. However, we have replac
 
 For our categorical variables, we will encode the set of following categories to be `0~(n_classes-1)`. Additionally, we have listed their numerical values for each unique values:
 
-* `hotel` - `'Resort Hotel': 0`, `'City Hotel': 1`
-* `arrival_date_month` - `'January': 0`, `'February': 1`, ... , `'December': 11`
-* `success_room_type` - `'True': 0`, `'False': 1`
-* `arrival_date_year` - `2015: 0`, `2016: 1`, `2017: 2`
+* `'hotel'` - `'Resort Hotel': 0`, `'City Hotel': 1`
+* `'arrival_date_month'` - `'January': 0`, `'February': 1`, ... , `'December': 11`
+* `'success_room_type'` - `'True': 0`, `'False': 1`
+* `'arrival_date_year'` - `2015: 0`, `2016: 1`, `2017: 2`
 
 For the following categorical variables, we will do one-hot encoding.
 * `'meal'`
