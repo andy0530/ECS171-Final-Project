@@ -61,10 +61,23 @@ As mentioned above, we scaled our data through MinMax normalization.
 
 
  For our logistic regression model we first run a general model with all of our feature excepting `'reservation_status_Canceled', 'reservation_status_Check-Out','reservation_status_No-Show'`. Our y-intercept is `is canceled` and our X is the rest of the features.
- In this case the data was split in to both training and testing data with a 80:20 ratio. 
+ In this case the data was split in to both training and testing data with a 80:20 ratio. Then using all of our variable we run a logistic model on with our train data. The logistic regression model was 1000 iteration and it run a 'newton-CG' algorithm. We as well create a classification report to get the accuracy of the model. 
+ 
+ 
+`picture 1 ` 
 
 
-From the this general logistic regresion model we got an accuracy of 81%. we run a p-value test where at significance 0.05 we would find which have actual correlation in predicting the if a booking is cancel. From this test we find that
+
+ Once we run our model we run our loss function to find our error. We as well run the same model with k-folds of 7 splits to make sure we are correct on our accuracy.
+ 
+`picture 2 besides picture 3` 
+ 
+After running our model since we find by looking at our scatter plot that some of the variable may not been contributing to the result we decide to run a p-value test to find the if we can drop some of the variables and improve our model. 
+
+`picture 4`
+
+
+At significance 0.05 we find that we fail to reject the null hypothesis for the variables below.
 
 * `arrival_date_month`
 * `arrival_date_week_number`
@@ -77,32 +90,62 @@ From the this general logistic regresion model we got an accuracy of 81%. we run
 * `market_segment_Online`
 * `distribution_channel_Undefined`
 
-fail to reject the null hypothesis and therefore do not have any relation in predicting the if a booking is cancel our not.
-Then we look at our error for both test and training data set. With both being similar enough that the model was correctly 
-implement as well as having an error of 0.429 and 0.427 with is low enough for it not to be overfitting
 
-Then we created a new model with just the values we consider relevant. We get the same accuracy of 81% as our original model
-meaning that our theory was right by eliminating those features.
+Finally we run our model using only the the variable that we find significant. In this case we again split our data again as well as run our logistic regression with 1000 iteration and 'Newtowns-CG' algorithm. We find a similar accuracy and error as the first model. 
+
+`picture 5`
 
 
-Finally we conclude that the three most relevant feature are 
+We as well run k-fold for our sencond model to check if we are using our data correctly.
 
-* `previous_cancellations`
-* `previous_bookings_not_canceled`
-* `required_car_parking_spaces`
+`picture 6`
 
-
-with required car parking spaces having the largest coeffiecient. previous cancellations is the second largest and
-not previous cancellations the third highest. 
-
-Interpretation:
-Going back to our model with our best accuracy. We find that for the three most essential features, required car parking spaces have a higher coefficient which shows a great correlation to not cancel the booking. This is because people who reserve more parking spaces are more likely to not cancel the reservation whereas people that do not have parking spaces have the opposite effect. The second highest is previous_cancellations which indicates that if a person has a previous cancellation, they are most likely to cancel again. Therefore it increases the likelihood of a reservation being canceled. Finally, the third highest feature, previous_boo kings_not _canceled shows that if a person has not canceled previously, then they are most likely to not cancel again in their next booking. This means that a person who has a parking spot reserved and has not canceled before is probably not going to cancel their reservation. On the other hand, if a person has canceled before and they do not have reserved parking spaces, they are likely to cancel the booking.
 
 ### Model 2: Neural Net Model
 
 ## Results
 
 ### Model 1: Logistic Model
+
+
+From the this general logistic regresion model we got an accuracy of 81%.Then we look at our error for both test and training data set. With both being similar enough that the model was correctly implement as well as having an error of 0.419 and 0.416. 
+
+`picture 6  beside picture 7`
+
+
+We aswell test our model with k-fold getting an accuracy of 81.4% and std 0.003.
+
+
+`pciture 8`
+
+
+we run a p-value test where at significance 0.05 we would find which have actual correlation in predicting the if a booking is cancel. From this test we find that the values below have not significance in our model.
+
+`picture 9`
+
+
+
+
+
+Then we created a new model with just the values we consider relevant. We get the same accuracy of 81% as our original model
+meaning that our theory was right by eliminating those features. SImilarly for our error we got 0.421 and 0.419 which is close enough to each other to inference that there is not underfitting the model or overfitting. 
+
+`picture 10 beside picture 11`
+
+looking at our k-fold we got an accuracy of 81.3% and std 0.002
+
+`picture 12`
+
+Finally we conclude that the three most relevant feature are :
+
+* `previous_cancellations`
+* `previous_bookings_not_canceled`
+* `required_car_parking_spaces`
+with coefficient:
+
+`picture 13`
+
+
 
 ### Model 2: Neural Net Model
 
@@ -138,6 +181,40 @@ For example, `'arrival_date_month'` has 12 unique values corresponding to each m
 However, for the other categorical variables—`'meal'`, `'market_segment'`, `'distribution_channel'`, `'deposit_type'`, `'customer_type'`, `'reservation_status'`— we decided to do one-hot encoding as the unique values of their corresponding columns were not instinctively numerically orderable.
 
 ### Model 1: Logistic Model
+When we are looking to predict the probability of semthing happening. An accuracy of 90% is preferable the accuracy we got for 81% is significant enough that the data provide would can actully be used to determine if a cancellation of an hotel booking would be done.
+
+`picture 13`
+
+
+For our error result for our first model we find that with is similar enough error for it not to be overfitting and not underfitting as well.
+
+`picture 14`
+
+looking at our confussion table we find that we are better at preddicting if a booking was not cancel with f1 score of 86% compared to predicting if they cancel with 72%
+
+`picture 15 `
+this meaning that our data is better and predicting when a booking would be cancel compared to when a booking would not be cancel.
+
+The reason for using the p-value test in the model is to find if we can improve our model by removing the least significant part of the data. Meaning that by reducing the variable we are most likely to find a better since we dismish the classification issue that can be cause by some of this variable.
+
+
+After running our second model and finding a similar result with accuracy of 81% we think that the eliminating the variables was good for our model but it did not improve it at all. Which actually show that the data in the variable we drop is actually not useful for the model.
+
+Similarly for our second model we find that the error is closed enough for it not to be overfitting our underfitting our model.
+`picture 16`
+
+looking at our confussion table we find that we are better at preddicting if a booking was not cancel with f1 score of 86% compared to predicting if they cancel with 72%
+
+`picture 17 `
+
+
+Finally we find that the largest coeffiecient in the model to be: required car parking spaces having the largest coeffiecient. previous cancellations is the second largest and not previous cancellations the third highest. 
+
+`picture 18`
+
+Interpretation:
+Going back to our model with our best accuracy. We find that for the three most essential features, required car parking spaces have a higher coefficient which shows a great correlation to not cancel the booking. This is because people who reserve more parking spaces are more likely to not cancel the reservation whereas people that do not have parking spaces have the opposite effect. The second highest is previous_cancellations which indicates that if a person has a previous cancellation, they are most likely to cancel again. Therefore it increases the likelihood of a reservation being canceled. Finally, the third highest feature, previous_boo kings_not _canceled shows that if a person has not canceled previously, then they are most likely to not cancel again in their next booking. This means that a person who has a parking spot reserved and has not canceled before is probably not going to cancel their reservation. On the other hand, if a person has canceled before and they do not have reserved parking spaces, they are likely to cancel the booking.
+
 
 ### Model 2: Neural Net Model
 
