@@ -67,15 +67,45 @@ As mentioned above, we scaled our data through MinMax normalization.
  In this case the data was split in to both training and testing data with a 80:20 ratio. Then using all of our variable we run a logistic model on with our train data. The logistic regression model was 1000 iteration and it run a 'newton-CG' algorithm. We as well create a classification report to get the accuracy of the model. 
  
  
-`picture 1 ` 
+```
+X = scaled_data.drop(['reservation_status_Canceled', 'reservation_status_Check-Out','reservation_status_No-Show','is_canceled']
+                     ,axis= 1)
+y = scaled_data['is_canceled']
+X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.2, random_state=17)
+model_log = LogisticRegression(penalty='none', max_iter=1000, solver='newton-cg').fit(X_train, y_train)
+predict_model = model_log.predict(X_test)
+print(classification_report(y_test,predict_model))
+predict_model2 = model_log.predict(X_train)
+print(classification_report(y_train,predict_model2))
+```
 
  Once we run our model we run our loss function to find our error. We as well run the same model with k-folds of 7 splits to make sure we are correct on our accuracy.
  
-`picture 2 besides picture 3` 
+```
+# for error loss 
+predict_model = model_log.predict_proba(X_test)
+print(log_loss(y_test,predict_model))
+predict_model2 = model_log.predict_proba(X_train)
+print(log_loss(y_train,predict_model2))
+
+# for k-fold
+
+cv = KFold(n_splits= 7, random_state=1, shuffle=True)
+scores = cross_val_score(model_log, X, y, scoring='accuracy', cv=cv, n_jobs=-1)
+print('Accuracy: %.3f (%.3f)' % (mean(scores), std(scores)))
+```
  
 After running our model since we find by looking at our scatter plot that some of the variable may not been contributing to the result we decide to run a p-value test to find the if we can drop some of the variables and improve our model. 
 
-`picture 4`
+```
+scores, pvalues = chi2(X, y)
+lst = []
+for i in range(0,len(model_log.coef_[0])):
+    if pvalues[i] > 0.05:
+        print(model_log.feature_names_in_[i],"B"+str(i)+ ':',model_log.coef_[0][i],"\nP-value:",pvalues[i])
+    elif pvalues[i] < 0.05:
+        lst.append(model_log.feature_names_in_[i])
+```
 
 
 At significance 0.05 we find that we fail to reject the null hypothesis for the variables below.
@@ -92,14 +122,35 @@ At significance 0.05 we find that we fail to reject the null hypothesis for the 
 * `distribution_channel_Undefined`
 
 
-Finally we run our model using only the the variable that we find significant. In this case we again split our data again as well as run our logistic regression with 1000 iteration and 'Newtowns-CG' algorithm. We find a similar accuracy and error as the first model. 
+Finally we run our model removing a module above. In this case we again split our data again as well as run our logistic regression with 1000 iteration and 'Newtowns-CG' algorithm. We find a similar accuracy and error as the first model. 
 
-`picture 5`
+```
+#for the second model
+X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.2, random_state=17)
+model_log = LogisticRegression(penalty='none', max_iter=1000, solver='newton-cg').fit(X_train, y_train)
+predict_model = model_log.predict(X_test)
+print(classification_report(y_test,predict_model))
+predict_model2 = model_log.predict(X_train)
+print(classification_report(y_train,predict_model2))
+
+
+#for the error 
+
+predict_model = model_log.predict_proba(X_test)
+print("testing error:",log_loss(y_test,predict_model))
+predict_model2 = model_log.predict_proba(X_train)
+print("Training error:",log_loss(y_train,predict_model2))
+```
 
 
 We as well run k-fold for our sencond model to check if we are using our data correctly.
 
-`picture 6`
+```
+#for the k-fold 
+cv = KFold(n_splits=7, random_state=17, shuffle=True)
+scores = cross_val_score(model_log, X, y, scoring='accuracy', cv=cv, n_jobs=-1)
+print('Accuracy: %.3f (%.3f)' % (mean(scores), std(scores)))
+```
 
 
 ### Model 2: Neural Net Model
