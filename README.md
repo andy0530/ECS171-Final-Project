@@ -230,33 +230,36 @@ modelFive.fit(X_train.astype('float'), y_train, batch_size = 1000, epochs = 100)
 ### Model 1: Logistic Model
 
 
-From the this general logistic regresion model we got an accuracy of 81%.Then we look at our error for both test and training data set. With both being similar enough that the model was correctly implement as well as having an error of 0.419 and 0.416. 
+From the this general logistic regresion model we got an accuracy of 81%.Then we look at our error for both test and training data set. Both error rates being similar enough that the model was correctly implement as well as having an error of 0.419 and 0.417. 
 
-`picture 6  beside picture 7`
+![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model1_1.png?raw=true)
 
+![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model1_2.png?raw=true)
 
 We aswell test our model with k-fold getting an accuracy of 81.4% and std 0.003.
 
+![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model1_8.png?raw=true)
 
-`pciture 8`
+
 
 
 we run a p-value test where at significance 0.05 we would find which have actual correlation in predicting the if a booking is cancel. From this test we find that the values below have not significance in our model.
 
-`picture 9`
+![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model1_7.png?raw=true)
 
 
 
 
 
 Then we created a new model with just the values we consider relevant. We get the same accuracy of 81% as our original model
-meaning that our theory was right by eliminating those features. SImilarly for our error we got 0.421 and 0.419 which is close enough to each other to inference that there is not underfitting the model or overfitting. 
+meaning that our theory was right by eliminating those features. SImilarly for our error we got 0.422 and 0.420 which is close enough to each other to inference that there is not underfitting the model or overfitting. 
 
-`picture 10 beside picture 11`
+![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model2_1.png?raw=true)
+![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model2_7.png?raw=true)
 
 looking at our k-fold we got an accuracy of 81.3% and std 0.002
 
-`picture 12`
+![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model2_7.png?raw=true)
 
 Finally we conclude that the three most relevant feature are :
 
@@ -265,7 +268,8 @@ Finally we conclude that the three most relevant feature are :
 * `required_car_parking_spaces`
 with coefficient:
 
-`picture 13`
+![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model2_2.png?raw=true)
+![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model2_6.png?raw=true)
 
 
 
@@ -341,35 +345,28 @@ However, for the other categorical variables—`'meal'`, `'market_segment'`, `'d
 
 ### Model 1: Logistic Model
 When we are looking to predict the probability of semthing happening. An accuracy of 90% is preferable the accuracy we got for 81% is significant enough that the data provide would can actully be used to determine if a cancellation of an hotel booking would be done.
-
-`picture 13`
-
-
 For our error result for our first model we find that with is similar enough error for it not to be overfitting and not underfitting as well.
 
-`picture 14`
+![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model1_6.png?raw=true)
 
 looking at our confussion table we find that we are better at preddicting if a booking was not cancel with f1 score of 86% compared to predicting if they cancel with 72%
 
-`picture 15 `
+![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model1_5.png?raw=true)
+
 this meaning that our data is better and predicting when a booking would be cancel compared to when a booking would not be cancel.
 
-The reason for using the p-value test in the model is to find if we can improve our model by removing the least significant part of the data. Meaning that by reducing the variable we are most likely to find a better since we dismish the classification issue that can be cause by some of this variable.
+The reason for using the p-value test in the model is to find if we can improve our model by removing the least significant part of the data. Meaning that by reducing the variable we are most likely to find a better since we dismish the classification issue that can be cause by some of this variable. After running our second model and finding a similar result with accuracy of 81% we think that the eliminating the variables was good for our model but it did not improve it at all. Which actually show that the data in the variable we drop is actually not useful for the model.
 
+![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model2_5.png?raw=true)
 
-After running our second model and finding a similar result with accuracy of 81% we think that the eliminating the variables was good for our model but it did not improve it at all. Which actually show that the data in the variable we drop is actually not useful for the model.
+Similarly for our second model we find that the error is closed enough for it not to be overfitting our underfitting our model. looking at our confussion table we find that we are better at preddicting if a booking was not cancel with f1 score of 86% compared to predicting if they cancel with 72%
 
-Similarly for our second model we find that the error is closed enough for it not to be overfitting our underfitting our model.
-`picture 16`
-
-looking at our confussion table we find that we are better at preddicting if a booking was not cancel with f1 score of 86% compared to predicting if they cancel with 72%
-
-`picture 17 `
+![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model2_3.png?raw=true)
 
 
 Finally we find that the largest coeffiecient in the model to be: required car parking spaces having the largest coeffiecient. previous cancellations is the second largest and not previous cancellations the third highest. 
 
-`picture 18`
+![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model2_7.png?raw=true)
 
 Interpretation:
 Going back to our model with our best accuracy. We find that for the three most essential features, required car parking spaces have a higher coefficient which shows a great correlation to not cancel the booking. This is because people who reserve more parking spaces are more likely to not cancel the reservation whereas people that do not have parking spaces have the opposite effect. The second highest is previous_cancellations which indicates that if a person has a previous cancellation, they are most likely to cancel again. Therefore it increases the likelihood of a reservation being canceled. Finally, the third highest feature, previous_boo kings_not _canceled shows that if a person has not canceled previously, then they are most likely to not cancel again in their next booking. This means that a person who has a parking spot reserved and has not canceled before is probably not going to cancel their reservation. On the other hand, if a person has canceled before and they do not have reserved parking spaces, they are likely to cancel the booking.
