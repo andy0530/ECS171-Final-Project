@@ -59,14 +59,11 @@ As mentioned above, we scaled our data through MinMax normalization.
 
 ### Model 1: Logistic Model
 
-
  For our logistic regression model we first run a general model with all of our feature excepting `'reservation_status_Canceled', 'reservation_status_Check-Out','reservation_status_No-Show'`. Our y-intercept is `is canceled` and our X is the rest of the features.
  In this case the data was split in to both training and testing data with a 80:20 ratio. Then using all of our variable we run a logistic model on with our train data. The logistic regression model was 1000 iteration and it run a 'newton-CG' algorithm. We as well create a classification report to get the accuracy of the model. 
  
  
 `picture 1 ` 
-
-
 
  Once we run our model we run our loss function to find our error. We as well run the same model with k-folds of 7 splits to make sure we are correct on our accuracy.
  
@@ -160,13 +157,25 @@ By doing so, we are able to extract most information from what is given. However
 This shows how a situation could be misinterpreted when a customer was simply offered a free 'upgrade'. Yet, we believe that this data might offer significant information that could be crucial in predicting if the customer cancelled or not.
 Lastly, we removed `'country'` as the dataset does not contain equal information on all countries in the world. Therefore, we concluded that the dataset is insufficient to make assumptions on a country-wide scale.
 
+![pairplot](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/1.png?raw=true)
+
 Secondly, from our pariplot, we can observe that most of the numerical variables does not contain negative values. This shows that a 'relu' activation function might be useful in creating our nerual net in latter part of this project.
 Additionally, we can observe some numerical variables showing a categorical variable-like distribution. For example, `'arrival_date_year'` represents the year of arrival date from a dataset with hotel bookings between the 1st of July 2015 and 31st of August 2017.
 Since it only contains three values of [2015, 2016, 2017], we believe it would be better to consider `'arrival_date_year'` as a categorical variables.
 Lastly, we can observe presence outliers from the pairplot such as the value with `'children' = 10`. Therefore, we will observe the effects of these points later in the study.
 
+
+![qq1](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-1.png?raw=true)
+![qq2](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-2.png?raw=true)
+(Samples from series of Q-Q plots)
+
 From our Q-Q plots, we can observe a right-skewed distributions as the plots have a long tail to the right. Additionally, we observe no negative values.
 Since, we cannot standardize our data when it is not normally distributed, we selected to do MinMax normalization.
+
+![pie1](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-3.png?raw=true)
+![pie2](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-4.png?raw=true)
+(Samples from series of pie charts)
+
 From our pie charts, we do see some values as 'Undefined' is categories such as `meal`, `distribution_channel`, and `market_segment`.
 However, we will wait until our model fitting to consider these values as the categories mentioned above may not be relevant.
 With finding null values, we observe that the four columns that have NaN values in the `'children'` column also has a value 'Undefined' for the `'distribution_channel'` variable.
