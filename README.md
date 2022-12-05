@@ -59,6 +59,8 @@ Column Descriptions
 
 ## Data Exploration
 
+![pairplot](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/1.png?raw=true)
+
 In our Data Exploration process, we dropping the following columns due to their consequent reasons:
 
 * `name` - Artifically created by owner of dataset
