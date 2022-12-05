@@ -59,7 +59,7 @@ Column Descriptions
 
 ## Data Exploration
 
-![pairplot](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/1.png?raw=true)
+
 
 In our Data Exploration process, we dropping the following columns due to their consequent reasons:
 
@@ -73,6 +73,12 @@ In our Data Exploration process, we dropping the following columns due to their 
 * `assigned_room_type` - Not possible to deciphyer the ID of the room (replaced by 'success_room_type')
 
 As stated above, we created a new column `'success_room_type'` which returns a `True` value when the customer was assigned to the room which they reserved `('reserved_room_type' == 'assigned_room_type')` or `False` when the two values does not match.
+
+![pairplot](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/1.png?raw=true)
+![qq1](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-1.png?raw=true)
+![qq2](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-2.png?raw=true)
+![pie1](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-3.png?raw=true)
+![pie2](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-4.png?raw=true)
 
 Additionally, we analyzed the distribution of all variables using a pairplot for all numerical columns and a pie char for all categorical columns. From the numerical columns, we were able to find that a lot of the columns were right-skewed as more observations had a value of 0. Additionally, our QQ-plot also agrees that the columns have a right-skewed distributions as the plots have a long tail to the right. 
 
