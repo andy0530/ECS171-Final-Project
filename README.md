@@ -79,7 +79,7 @@ predict_model2 = model_log.predict(X_train)
 print(classification_report(y_train,predict_model2))
 ```
 
- Once we run our model we run our loss function to find our error. We as well run the same model with k-folds of 7 splits to make sure we are correct on our accuracy.
+ Once we run our model we run our loss function to find our error. We as well run the same model with k-folds of 7 splits to make sure we are correct in our accuracy.
  
 ```
 # for error loss 
@@ -95,7 +95,7 @@ scores = cross_val_score(model_log, X, y, scoring='accuracy', cv=cv, n_jobs=-1)
 print('Accuracy: %.3f (%.3f)' % (mean(scores), std(scores)))
 ```
  
-After running our model since we find by looking at our scatter plot that some of the variable may not been contributing to the result we decide to run a p-value test to find the if we can drop some of the variables and improve our model. 
+After running our model since we find by looking at our scatter plot that some of the variables may not be contributing to the result we decide to run a p-value test to find them if we can drop some of the variables and improve our model. 
 
 ```
 scores, pvalues = chi2(X, y)
@@ -128,7 +128,7 @@ X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.2, random_s
 model_log = LogisticRegression(penalty='none', max_iter=1000, solver='newton-cg').fit(X_train, y_train)
 ```
 
-Finally we run our model removing a module above. In this case we again split our data again as well as run our logistic regression with 1000 iteration and 'Newtowns-CG' algorithm. We find a similar accuracy and error as the first model. We as well run k-fold for our sencond model to check if we are using our data correctly.
+Finally, we run our model removing the variables above. In this case, we split our data again as well as run our logistic regression with 1000 iterations and the 'Newtowns-CG' algorithm. We find a similar accuracy and error as the first model. We as well run a k-fold for our second model to check if we are using our data correctly.
 
 
 ### Model 2: Neural Net Model
@@ -208,20 +208,20 @@ modelFive.fit(X_train.astype('float'), y_train, batch_size = 1000, epochs = 100)
 ### Model 1: Logistic Model
 
 
-From the this general logistic regresion model we got an accuracy of 81%.Then we look at our error for both test and training data set. Both error rates being similar enough that the model was correctly implement as well as having an error of 0.419 and 0.417. 
+From this general logistic regression model, we got an accuracy of 81%. Then we look at our error for both the test and training data set. Both error rates are similar enough that the model was correctly implemented as well as having an error of 0.419 and 0.417. 
 
 ![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model1_1.png?raw=true)
 
 ![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model1_2.png?raw=true)
 
-We aswell test our model with k-fold getting an accuracy of 81.4% and std 0.003.
+We as well test our model with k-fold getting an accuracy of 81.4% and std 0.003.
 
 ![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model1_8.png?raw=true)
 
 
 
 
-we run a p-value test where at significance 0.05 we would find which have actual correlation in predicting the if a booking is cancel. From this test we find that the values below have not significance in our model.
+we run a p-value test where at significance 0.05 we would find which has an actual correlation in predicting if a booking is canceled. From this test, we find that the values below have no significance in our model.
 
 ![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model1_7.png?raw=true)
 
@@ -322,33 +322,31 @@ For example, `'arrival_date_month'` has 12 unique values corresponding to each m
 However, for the other categorical variables—`'meal'`, `'market_segment'`, `'distribution_channel'`, `'deposit_type'`, `'customer_type'`, `'reservation_status'`— we decided to do one-hot encoding as the unique values of their corresponding columns were not instinctively numerically orderable.
 
 ### Model 1: Logistic Model
-When we are looking to predict the probability of semthing happening. An accuracy of 90% is preferable the accuracy we got for 81% is significant enough that the data provide would can actully be used to determine if a cancellation of an hotel booking would be done.
-For our error result for our first model we find that with is similar enough error for it not to be overfitting and not underfitting as well.
+When we are looking to predict the probability of something happening. An accuracy of 90% is preferable the accuracy we got of 81% is significant enough that the data provided would actually be used to determine if the cancellation of a hotel booking would be done.
+For our error result for our first model, we find that with is a similar enough error for it not to be overfitting and not underfitting as well.
 
 ![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model1_6.png?raw=true)
 
-looking at our confussion table we find that we are better at preddicting if a booking was not cancel with f1 score of 86% compared to predicting if they cancel with 72%
+looking at our confusion table we find that we are better at predicting if a booking was not cancel with f1 score of 86% compared to predicting if they cancel with 72%
 
 ![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model1_5.png?raw=true)
 
-this meaning that our data is better and predicting when a booking would be cancel compared to when a booking would not be cancel.
-
-The reason for using the p-value test in the model is to find if we can improve our model by removing the least significant part of the data. Meaning that by reducing the variable we are most likely to find a better since we dismish the classification issue that can be cause by some of this variable. After running our second model and finding a similar result with accuracy of 81% we think that the eliminating the variables was good for our model but it did not improve it at all. Which actually show that the data in the variable we drop is actually not useful for the model.
+this means that our data is better and predicting when a booking would be canceled compared to when a booking would not be canceled.
+The reason for using the p-value test in the model is to find out if we can improve our model by removing the least significant part of the data. Meaning that by reducing the variable we are most likely to find a better one since we diminish the classification issue that can be caused by some of these variables. After running our second model and finding a similar result with an accuracy of 81% we think that eliminating the variables was good for our model but it did not improve it at all. Which shows that the data in the variable we drop is not useful for the model.
 
 ![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model2_5.png?raw=true)
 
-Similarly for our second model we find that the error is closed enough for it not to be overfitting our underfitting our model. looking at our confussion table we find that we are better at preddicting if a booking was not cancel with f1 score of 86% compared to predicting if they cancel with 72%
+Similarly, for our second model, we find that the error is closed enough for it not to be overfitting our underfitting model. looking at our confusion table we find that we are better at predicting if a booking was not canceled with f1 score of 86% compared to predicting if they cancel with 72%
 
 ![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model2_3.png?raw=true)
 
 
-Finally we find that the largest coeffiecient in the model to be: required car parking spaces having the largest coeffiecient. previous cancellations is the second largest and not previous cancellations the third highest. 
+Finally, we find that the largest coefficients in the model are: required car parking spaces having the largest coefficients. previous cancellations is the second largest and not previous cancellations are the third highest. 
 
 ![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/Picture_model2_7.png?raw=true)
 
 Interpretation:
-Going back to our model with our best accuracy. We find that for the three most essential features, required car parking spaces have a higher coefficient which shows a great correlation to not cancel the booking. This is because people who reserve more parking spaces are more likely to not cancel the reservation whereas people that do not have parking spaces have the opposite effect. The second highest is previous_cancellations which indicates that if a person has a previous cancellation, they are most likely to cancel again. Therefore it increases the likelihood of a reservation being canceled. Finally, the third highest feature, previous_boo kings_not _canceled shows that if a person has not canceled previously, then they are most likely to not cancel again in their next booking. This means that a person who has a parking spot reserved and has not canceled before is probably not going to cancel their reservation. On the other hand, if a person has canceled before and they do not have reserved parking spaces, they are likely to cancel the booking.
-
+Going back to our model with our best accuracy. We find that for the three most essential features, required car parking spaces have a higher coefficient which shows a great correlation to not canceling the booking. This is because people who reserve more parking spaces are more likely to not cancel the reservation whereas people that do not have parking spaces have the opposite effect. The second highest is previous_cancellations which indicates that if a person has a previous cancellation, they are most likely to cancel again. Therefore it increases the likelihood of a reservation being canceled. Finally, the third highest feature, previous_boo kings_not _canceled shows that if a person has not canceled previously, then they are most likely to not cancel again in their next booking. This means that a person who has a parking spot reserved and has not canceled before is probably not going to cancel their reservation. On the other hand, if a person has canceled before and they do not have reserved parking spaces, they are likely to cancel the booking.
 
 ### Model 2: Neural Net Model
 
