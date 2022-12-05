@@ -233,7 +233,8 @@ Going back to our model with our best accuracy. We find that for the three most 
 ## Conclusion
 
 ## Collaboration
-* Jun Ha (Andy) Lee
-* Erick S. Arenas
-* Soumyajit (Sam) Chatterjee
-* Joyjit (Joy) Chatterjee
+While there was no team leader/manager, we initially divided the project into four parts to be handled by each member
+* Jun Ha (Andy) Lee - worked on data exploration/pre-processing
+* Erick S. Arenas - worked on Model 1: Logistic Model
+* Soumyajit (Sam) Chatterjee - worked on Model 2: Neural Net Model
+* Joyjit (Joy) Chatterjee - worked on report/readme and helped on Model 2: Neural Net Model
