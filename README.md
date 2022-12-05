@@ -122,35 +122,7 @@ At significance 0.05 we find that we fail to reject the null hypothesis for the 
 * `distribution_channel_Undefined`
 
 
-Finally we run our model removing a module above. In this case we again split our data again as well as run our logistic regression with 1000 iteration and 'Newtowns-CG' algorithm. We find a similar accuracy and error as the first model. 
-
-```
-#for the second model
-X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.2, random_state=17)
-model_log = LogisticRegression(penalty='none', max_iter=1000, solver='newton-cg').fit(X_train, y_train)
-predict_model = model_log.predict(X_test)
-print(classification_report(y_test,predict_model))
-predict_model2 = model_log.predict(X_train)
-print(classification_report(y_train,predict_model2))
-
-
-#for the error 
-
-predict_model = model_log.predict_proba(X_test)
-print("testing error:",log_loss(y_test,predict_model))
-predict_model2 = model_log.predict_proba(X_train)
-print("Training error:",log_loss(y_train,predict_model2))
-```
-
-
-We as well run k-fold for our sencond model to check if we are using our data correctly.
-
-```
-#for the k-fold 
-cv = KFold(n_splits=7, random_state=17, shuffle=True)
-scores = cross_val_score(model_log, X, y, scoring='accuracy', cv=cv, n_jobs=-1)
-print('Accuracy: %.3f (%.3f)' % (mean(scores), std(scores)))
-```
+Finally we run our model removing a module above. In this case we again split our data again as well as run our logistic regression with 1000 iteration and 'Newtowns-CG' algorithm. We find a similar accuracy and error as the first model. We as well run k-fold for our sencond model to check if we are using our data correctly.
 
 
 ### Model 2: Neural Net Model
