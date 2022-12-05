@@ -132,10 +132,10 @@ Finally, we run our model removing the variables above. In this case, we split o
 
 ### Model 2: Neural Net Model
 
-In the beggining, all the important libraries are imported (keras and associated layers).
-The training and test data are the split into an 80:20 ratio.
+In the beginning, all the important libraries are imported (keras and associated layers).
+The training and test data are split into an 80:20 ratio.
 
-The first attempt at generating a neural net model contains only two hidden layers. The activation function for the first hidden layer is relu, or rectified linear unit, and the layer contains 10 nodes. The activation function for the second layer is sigmoid, and the layer contains 1 node. The default batch size and epoch are used, each of which is 32. The model is then fit to the training data (which intializes intial weights) and used to predict on the testing data.
+The first attempt at generating a neural net model contains only two hidden layers. The activation function for the first hidden layer is relu, or rectified linear unit, and the layer contains 10 nodes. The activation function for the second layer is sigmoid, and the layer contains 1 node. The default batch size and epoch are used, each of which is 32. The model is then fit to the training data (which initializes initial weights) and used to predict the testing data.
 
 ``` 
 modelOne = Sequential()
@@ -166,7 +166,7 @@ modelTwo.compile(optimizer = opt, loss = 'binary_crossentropy')
 modelTwo.fit(X_train.astype('float'), y_train,verbose=0)
 ```
 
-The number of nodes in each of the hidden layers are then increased. Following this is another classification report generation. The code is the same as above.
+The number of nodes in each of the hidden layers is then increased. Following this is another classification report generation. The code is the same as above.
 
 ```
 modelThree = Sequential()
@@ -178,7 +178,7 @@ modelThree.compile(optimizer = opt, loss = 'binary_crossentropy')
 modelThree.fit(X_train.astype('float'), y_train,verbose=0)
 ```
 
-Following, this, the number of epochs are increased are decreased to 10 (from the default 32). Another classification report is generated.
+Following, this, the number of epochs is increased are decreased to 10 (from the default 32). Another classification report is generated.
 
 ```
 modelFour = Sequential()
@@ -190,7 +190,7 @@ modelFour.compile(optimizer = opt, loss = 'binary_crossentropy')
 modelFour.fit(X_train.astype('float'), y_train,epochs=10,verbose=0)
 ```
 
-Finally, the batch size and number of epochs are changed to reach the final neural net model. Additionally, the number of nodes for the second layer were decreased down to 10. The epochs are changed to 100 and the batch size are now 1000.
+Finally, the batch size and number of epochs are changed to reach the final neural net model. Additionally, the number of nodes for the second layer were decreased to 10. The epochs are changed to 100 and the batch size is now 1000.
 
 ```
 modelFive = Sequential()
@@ -252,7 +252,7 @@ with coefficient:
 
 ### Model 2: Neural Net Model
 
-There were a total of 5 attempts made at creating the neural net model. The fifth and final attempt is considered as our final neural net model. Here are the results for each of the attempts, given as classification reports.
+There were a total of 5 attempts made at creating the neural net model. The fifth and final attempt is considered our final neural net model. Here are the results for each of the attempts, given as classification reports.
 
 Attempt 1 (Simple Neural Net):
 
@@ -349,21 +349,20 @@ Going back to our model with our best accuracy. We find that for the three most 
 
 ### Model 2: Neural Net Model
 
-The nerual net was chosen as the second model for its ability to handle complex relations between the features and the label (is_cancelled). 
+The neural net was chosen as the second model for its ability to handle complex relations between the features and the label (is_cancelled).
 
-We began by  adding two hidden layers because we didn't want to increase the complexity of the model. Rather, we wanted to start with a simpler neural nets and adjust the hyperparameters along the way. 
+We began by adding two hidden layers because we didn't want to increase the complexity of the model. Rather, we wanted to start with simpler neural nets and adjust the hyperparameters along the way.
 
 We chose the relu activation function because of the way it handles negative values. For example, it would be odd to think that a parent could have a negative number of children. The relu function realistically handles this case by assigning a bottom boundary of 0.
-
 Our choice of the sigmoid activation function was influenced by our decision for the output to be a probability, between 0 and 1.
 
-The output was thresholded in order to get discrete outputs of 0 or 1. This was required since the classification report generates recall, precision, and accuracy based on two arrays (yhat_test and y_test) that contain discreet values that are either 0 or 1. The threshold was set to .5 because we wanted to round our probabilities (< .5 gets rounded to 0, and > .5 gets rounded to 1).
+The output was thresholded to get discrete outputs of 0 or 1. This was required since the classification report generates recall, precision, and accuracy based on two arrays (yhat_test and y_test) that contain discreet values that are either 0 or 1. The threshold was set to .5 because we wanted to round our probabilities (< .5 gets rounded to 0, and > .5 gets rounded to 1).
 
-The accuracy for the first attempt wasn't great and we decided that a more complex model could increase our accuracy. Therefore, the second hidden layer (of relu activation) was added. However, that didn't seem to help the accuracy or precision of our model either. In fact, the accuracy for the first and second attempts were almost the same. We added more nodes to the hidden layers of the model, but it didn't increase the accuracy by too much. Therefore, we decided that increasing the complexity of our model anymore wasn't going to help and decided to tune other hyperparameters.
+The accuracy for the first attempt wasn't great and we decided that a more complex model could increase our accuracy. Therefore, the second hidden layer (of relu activation) was added. However, that didn't seem to help the accuracy or precision of our model either. The accuracy for the first and second attempts was almost the same. We added more nodes to the hidden layers of the model, but it didn't increase the accuracy by too much. Therefore, we decided that increasing the complexity of our model anymore wasn't going to help and decided to tune other hyperparameters.
 
-Attempts 4 and 5 engaged in changing the number of epochs and batch size. Our reasoning was based on the assumption that maybe the model was complex enough, but it's cross validation was poor. Therefore, in the fourth attempt, the number of epochs were decreased to make sure that the model would run less times on the training data. In the fifth attempt, the batch size was increased to make sure that the model calculated loss after seeing many observations at the same time. 
+Attempts 4 and 5 engaged in changing the number of epochs and batch size. Our reasoning was based on the assumption that maybe the model was complex enough, but its cross-validation was poor. Therefore, in the fourth attempt, the number of epochs was decreased to make sure that the model would run fewer times on the training data. In the fifth attempt, the batch size was increased to make sure that the model calculated loss after seeing many observations at the same time.
 
-After 5 attempts, the neural net model gave a pretty high accuracy. However, the final accuracy was still not above 90. We think that changing the different activation functions could have made a model with greater predictibility, but were limited by our knowledge of what combinations to use. Additionally, maybe adding more nodes could have increased our accuracy slightly, but it clearly didn't show a huge impact on overall predicitibility of the model. 
+After 5 attempts, the neural net model gave a pretty high accuracy. However, the final accuracy was still not above 90. We think that changing the different activation functions could have made a model with greater predictability, but were limited by our knowledge of what combinations to use. Additionally, maybe adding more nodes could have increased our accuracy slightly, but it clearly didn't show a huge impact on the overall predictability of the model.
 
 ## Conclusion
 
