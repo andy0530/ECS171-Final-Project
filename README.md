@@ -175,6 +175,7 @@ Since, we cannot standardize our data when it is not normally distributed, we se
 
 ![pie1](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-3.png?raw=true)
 ![pie2](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-4.png?raw=true)
+![pie3](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-5.png?raw=true)
 
 (Samples from series of pie charts)
 
