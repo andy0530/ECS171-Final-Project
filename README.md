@@ -167,6 +167,7 @@ Lastly, we can observe presence outliers from the pairplot such as the value wit
 
 ![qq1](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-1.png?raw=true)
 ![qq2](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-2.png?raw=true)
+
 (Samples from series of Q-Q plots)
 
 From our Q-Q plots, we can observe a right-skewed distributions as the plots have a long tail to the right. Additionally, we observe no negative values.
@@ -174,6 +175,7 @@ Since, we cannot standardize our data when it is not normally distributed, we se
 
 ![pie1](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-3.png?raw=true)
 ![pie2](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/2-4.png?raw=true)
+
 (Samples from series of pie charts)
 
 From our pie charts, we do see some values as 'Undefined' is categories such as `meal`, `distribution_channel`, and `market_segment`.
