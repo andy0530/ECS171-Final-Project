@@ -155,6 +155,76 @@ print('Accuracy: %.3f (%.3f)' % (mean(scores), std(scores)))
 
 ### Model 2: Neural Net Model
 
+In the beggining, all the important libraries are imported (keras and associated layers).
+The training and test data are the split into an 80:20 ratio.
+
+The first attempt at generating a neural net model contains only two hidden layers. The activation function for the first hidden layer is relu, or rectified linear unit, and the layer contains 10 nodes. The activation function for the second layer is sigmoid, and the layer contains 1 node. The default batch size and epoch are used, each of which is 32. The model is then fit to the training data (which intializes intial weights) and used to predict on the testing data.
+
+``` 
+modelOne = Sequential()
+modelOne.add(Dense(units = 10, activation = 'relu', input_dim = 33)) 
+modelOne.add(Dense(units = 1, activation = 'sigmoid', input_dim = 10)) 
+opt = keras.optimizers.RMSprop(learning_rate=0.0001) 
+modelOne.compile(optimizer = opt, loss = 'binary_crossentropy') 
+modelOne.fit(X_train.astype('float'), y_train,verbose=0)
+```
+
+Once the predictions are recorded, they are thresholded and used to generate a classification report. 
+
+```
+yhat_test = modelOne.predict(X_test.astype(float))
+yhat_test = [ 1 if y>=0.5 else 0 for y in yhat_test ]
+print(classification_report(y_test, yhat_test))
+```
+
+Another layer is then added to the model, between the two layers mentioned above. This layer has a relu activation function and consists of 10 nodes. The model then predicts again on the testing data. Another classification report is generated. 
+
+```
+modelTwo = Sequential()
+modelTwo.add(Dense(units = 10, activation = 'relu', input_dim = 33))
+modelTwo.add(Dense(units = 10, activation = 'relu', input_dim = 10))
+modelTwo.add(Dense(units = 1, activation = 'sigmoid', input_dim = 10))
+opt = keras.optimizers.RMSprop(learning_rate=0.0001)
+modelTwo.compile(optimizer = opt, loss = 'binary_crossentropy')
+modelTwo.fit(X_train.astype('float'), y_train,verbose=0)
+```
+
+The number of nodes in each of the hidden layers are then increased. Following this is another classification report generation. The code is the same as above.
+
+```
+modelThree = Sequential()
+modelThree.add(Dense(units = 100, activation = 'relu', input_dim = 33))
+modelThree.add(Dense(units = 100, activation = 'relu', input_dim = 100))
+modelThree.add(Dense(units = 1, activation = 'sigmoid', input_dim = 100))
+opt = keras.optimizers.RMSprop(learning_rate=0.0001)
+modelThree.compile(optimizer = opt, loss = 'binary_crossentropy')
+modelThree.fit(X_train.astype('float'), y_train,verbose=0)
+```
+
+Following, this, the number of epochs are increased are decreased to 10 (from the default 32). Another classification report is generated.
+
+```
+modelFour = Sequential()
+modelFour.add(Dense(units = 100, activation = 'relu', input_dim = 33))
+modelFour.add(Dense(units = 100, activation = 'relu', input_dim = 100))
+modelFour.add(Dense(units = 1, activation = 'sigmoid', input_dim = 100))
+opt = keras.optimizers.RMSprop(learning_rate=0.0001)
+modelFour.compile(optimizer = opt, loss = 'binary_crossentropy')
+modelFour.fit(X_train.astype('float'), y_train,epochs=10,verbose=0)
+```
+
+Finally, the batch size and number of epochs are changed to reach the final neural net model. Additionally, the number of nodes for the second layer were decreased down to 10. The epochs are changed to 100 and the batch size are now 1000.
+
+```
+modelFive = Sequential()
+modelFive.add(Dense(units = 1000, activation = 'relu', input_dim = 33))
+modelFive.add(Dense(units = 10, activation = 'relu', input_dim = 1000))
+modelFive.add(Dense(units = 1, activation = 'sigmoid', input_dim = 10))
+opt = keras.optimizers.RMSprop(learning_rate=0.0001)
+modelFive.compile(optimizer = opt, loss = 'binary_crossentropy')
+modelFive.fit(X_train.astype('float'), y_train, batch_size = 1000, epochs = 100)
+```
+
 ## Results
 
 ### Model 1: Logistic Model
@@ -200,6 +270,28 @@ with coefficient:
 
 
 ### Model 2: Neural Net Model
+
+There were a total of 5 attempts made at creating the neural net model. The fifth and final attempt is considered as our final neural net model. Here are the results for each of the attempts, given as classification reports.
+
+Attempt 1 (Simple Neural Net):
+
+![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/NN_Attempt1.png?raw=true)
+
+Attempt 2 (Additional Layer):
+
+![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/NN_Attempt2.png?raw=true)
+
+Attempt 3 (More Nodes Per Layer):
+
+![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/NN_Attempt3.png?raw=true)
+
+Attempt 4 (Decreased Epochs):
+
+![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/NN_Attempt4.png?raw=true)
+
+Attempt 5 (Increased Epochs and Batch Size):
+
+![png](https://github.com/andy0530/ECS171-Final-Project/blob/main/figures/NN_Attempt5.png?raw=true)
 
 ## Discussion
 
@@ -284,6 +376,22 @@ Going back to our model with our best accuracy. We find that for the three most 
 
 
 ### Model 2: Neural Net Model
+
+The nerual net was chosen as the second model for its ability to handle complex relations between the features and the label (is_cancelled). 
+
+We began by  adding two hidden layers because we didn't want to increase the complexity of the model. Rather, we wanted to start with a simpler neural nets and adjust the hyperparameters along the way. 
+
+We chose the relu activation function because of the way it handles negative values. For example, it would be odd to think that a parent could have a negative number of children. The relu function realistically handles this case by assigning a bottom boundary of 0.
+
+Our choice of the sigmoid activation function was influenced by our decision for the output to be a probability, between 0 and 1.
+
+The output was thresholded in order to get discrete outputs of 0 or 1. This was required since the classification report generates recall, precision, and accuracy based on two arrays (yhat_test and y_test) that contain discreet values that are either 0 or 1. The threshold was set to .5 because we wanted to round our probabilities (< .5 gets rounded to 0, and > .5 gets rounded to 1).
+
+The accuracy for the first attempt wasn't great and we decided that a more complex model could increase our accuracy. Therefore, the second hidden layer (of relu activation) was added. However, that didn't seem to help the accuracy or precision of our model either. In fact, the accuracy for the first and second attempts were almost the same. We added more nodes to the hidden layers of the model, but it didn't increase the accuracy by too much. Therefore, we decided that increasing the complexity of our model anymore wasn't going to help and decided to tune other hyperparameters.
+
+Attempts 4 and 5 engaged in changing the number of epochs and batch size. Our reasoning was based on the assumption that maybe the model was complex enough, but it's cross validation was poor. Therefore, in the fourth attempt, the number of epochs were decreased to make sure that the model would run less times on the training data. In the fifth attempt, the batch size was increased to make sure that the model calculated loss after seeing many observations at the same time. 
+
+After 5 attempts, the neural net model gave a pretty high accuracy. However, the final accuracy was still not above 90. We think that changing the different activation functions could have made a model with greater predictibility, but were limited by our knowledge of what combinations to use. Additionally, maybe adding more nodes could have increased our accuracy slightly, but it clearly didn't show a huge impact on overall predicitibility of the model. 
 
 ## Conclusion
 
