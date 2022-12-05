@@ -121,6 +121,12 @@ At significance 0.05 we find that we fail to reject the null hypothesis for the 
 * `market_segment_Online`
 * `distribution_channel_Undefined`
 
+```
+X = scaled_data[lst]
+y = scaled_data['is_canceled']
+X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.2, random_state=17)
+model_log = LogisticRegression(penalty='none', max_iter=1000, solver='newton-cg').fit(X_train, y_train)
+```
 
 Finally we run our model removing a module above. In this case we again split our data again as well as run our logistic regression with 1000 iteration and 'Newtowns-CG' algorithm. We find a similar accuracy and error as the first model. We as well run k-fold for our sencond model to check if we are using our data correctly.
 
