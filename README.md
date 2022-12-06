@@ -366,7 +366,14 @@ After 5 attempts, the neural net model gave a pretty high accuracy. However, the
 
 ## Conclusion
 
+Throughout this study, we have found that our data is insufficient to observe an accuracy higher than 90%. This shows that our data did not hold all information to accurately predict the cancellation status. Therefore, we believe that our models could have performed better if we have done additional preprocessing steps by analyzing each individual factor. For example, we believe that we could have tried to do a log transformation of `adr` to make data conform to normality as it is a monetary variable. Additionally, we could have reduced the dimensions of our dataset by creating columns like `success_room_type` or by doing a principal component analysis (PCA). Lastly, if our dataset was still unable to predict the cancellation status, we could have used additional datasets about the economy or weather to help increase accuracy.
+
+After finalizing the logistic regression model we find that maybe the limitation of the logistic regression model assuming linearity between the dependent and independent variables could have been the reason why it did not perform as well as we wanted. We think that for this reason, an SVM model could have worked better with the data provided. With hindsight, we find our model classification to have a higher specificity (TNR) than sensitivity (TPR). An SVM model could have helped by creating a more clear line between what is a canceled booking and not a canceled booking.
+
+Furthermore, we believe that our models might have performed poorly due to the multicollinearity of our independent variables. For example, `required_car_parking_spaces` would have a strong correlation with `adults`. Therefore, we could have attempted to try a Naive Bayes classifier as it is not affected by multicollinearity.
+
 ## Collaboration
+
 While there was no team leader/manager, we initially divided the project into four parts to be handled by each member
 * Jun Ha (Andy) Lee - worked on data exploration/pre-processing
 * Erick S. Arenas - worked on Model 1: Logistic Model
